@@ -20,7 +20,7 @@ You can find the `Datasheet <https://assemblage-dataset.net/assets/total-datashe
 +-------------+---------------+---------+-------+----------+
 | Data source | Compiler      | OS      | Count | Licensed |
 +=============+===============+=========+=======+==========+
-| GitHub      | Visual Studio | Windows | 96k   | 64k      |
+| GitHub      | Visual Studio | Windows | 960k  | 64k      |
 +-------------+---------------+---------+-------+----------+
 | GitHub      | GCC/Clang     | Linux   | 428k  | 211k     |
 +-------------+---------------+---------+-------+----------+
