@@ -36,19 +36,20 @@ Please make sure these are installed, or you have access to:
 .. warning::
     You should put you server under firewall and limit the access to these ports, also make sure these ports are accessile by your worker instances
 
-1. Clone the repository
+1.  Clone the repository
     
         .. code-block:: bash
     
             git clone git@github.com:Assemblage-Dataset/Assemblage.git
             cd Assemblage
 
-2. Modify the cluster file
+2.  Modify the cluster file
+
     You can find examples located under `example_workers`. We will use `example_cluster.py` as example,
     you can declare the workers, crawlers and the database connection in this file.
 
 
-3. Install local dependencies, and start local clusters. The cluster file will create Docker images and boot up containers for you.
+3.  Install local dependencies, and start local clusters. The cluster file will create Docker images and boot up containers for you.
 
             .. code-block:: bash
     
