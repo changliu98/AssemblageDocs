@@ -1,5 +1,5 @@
-deployment
-==========
+deployment_liunx
+================
 
 
 .. autosummary::
@@ -16,11 +16,6 @@ The system is made from 3 main components:
 #. Coordinator, where tasks being packed and dispatched
 #. Worker, where tasks are being executed and binaries are being built
 #. DB, the database to store records
-
-.. note::
-    As vcpkg worker is extremely computing intensive, and the amount of projects is consistent, 
-    it has been packed as a standlone worker without the need of a coordinator, and you can skip the next section.
-
 
 Coordinator Setup
 -----------------

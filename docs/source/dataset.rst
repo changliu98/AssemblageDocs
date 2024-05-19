@@ -14,7 +14,7 @@ You can find the `Datasheet <https://assemblage-dataset.net/assets/total-datashe
 
 
 .. note::
-    Currently we are only releaseing datasets that have license, such as MIT, Apache, or BSD.
+    Currently we are only releaseing binaries built from repositories that have license.
 
 
 +-------------+---------------+---------+-------+----------+

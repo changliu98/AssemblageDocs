@@ -10,5 +10,6 @@ Contents
 
 .. toctree::
 
-   deployment
    dataset
+   deployment_linux
+   deployment_windows
