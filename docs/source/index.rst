@@ -13,3 +13,4 @@ Contents
    dataset
    deployment_linux
    deployment_windows
+   deployment_vcpkg
