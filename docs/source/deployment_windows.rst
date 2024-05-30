@@ -133,6 +133,5 @@ Optional: Recover dataset
     :download:`sept25.json.zip <assets/sept25.json.zip>`
 
     .. warning::
-        The previous state is not guaranteed to be the same as the current state, 
-            as the repository may have been hidden,deleted
-            to accurately recover dataset, a **full git clone** with all history will be performed, which will be extremely slow and resource consuming
+        The previous state is not guaranteed to be the same as the current state, as the repository may have been hidden/deleted, some binaries might not be recovered.
+        Meanwhile, to accurately recover dataset from source code, a **full git clone** with all history will be performed, which will be extremely slow and resource consuming
