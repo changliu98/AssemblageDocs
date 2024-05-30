@@ -122,3 +122,17 @@ Here is the step-by-step guide to set up a Windows worker
     You can create boot up tasks using Task scheduler, to start the worker automatically when the system starts, 
     which is very useful for scaling up the workers on cloud instances. Some scripts are provided under `script` folder
 
+
+Optional: Recover dataset
+-------------------------
+
+    Assemblage can recover the state from previous running state and remake the binary dataset from the last state, which can be useful
+    if the binary itself can not be distributed. To reload the previous state, grab some of the following recipe(in JSON format), and 
+    boot up the CLI, go to `loadrepo` option, and provide the JSON file, system will build the dataset from the provided file.
+
+    :download:`sept25.json.zip <assets/sept25.json.zip>`
+
+    .. warning::
+        The previous state is not guaranteed to be the same as the current state, 
+            as the repository may have been hidden,deleted
+            to accurately recover dataset, a **full git clone** with all history will be performed, which will be extremely slow and resource consuming
