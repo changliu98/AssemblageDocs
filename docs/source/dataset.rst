@@ -94,23 +94,14 @@ Dataset location
 
 The dataset is available at the following locations, currently hosted on Hugging Face,
 
-#. Windows GitHub dataset (Processed to SQLite database, 67k, last updated: May 11th 2024):  
-   
-   #. `SQLite databse, 84G inflated <https://huggingface.co/datasets/changliu8541/Assemblage_PE/resolve/main/winpe_pdbs.sqlite.tar.xz>`_
-   #. `Binary dataset ~200G inflated <https://huggingface.co/datasets/changliu8541/Assemblage_PE/resolve/main/binaries.tar.xz>`_
-   #. `Binary dataset (pdb file removed), 21G inflated <https://huggingface.co/datasets/changliu8541/Assemblage_PE/resolve/main/binaries_nopdb.tar.xz>`_
+#. Windows GitHub dataset (~100k, last update: May 27th):
 
+   https://huggingface.co/datasets/changliu8541/Assemblage_PE
 
+#. Windows vcpkg dataset (56k, last update: May 25th):
 
-#. Windows vcpkg dataset (Processed to SQLite database, 29k):
+   https://huggingface.co/datasets/changliu8541/Assemblage_vcpkgDLL
 
-   #. `SQLite database, 21G inflated <https://huggingface.co/datasets/changliu8541/Assemblage_vcpkgDLL/resolve/main/vcpkg.sqlite.tar.gz>`_
-   #. `Binary dataset with pdb files, 205G inflated <https://huggingface.co/datasets/changliu8541/Assemblage_vcpkgDLL/resolve/main/vcpkg.tar.xz>`_
+#. Linux GitHub dataset (211k):
 
-#. Linux GitHub dataset (Processed to SQLite database, 211k):
-
-   #. `SQLite database, 23M <https://huggingface.co/datasets/changliu8541/Assemblage_LinuxELF/resolve/main/linux.sqlite.tar.xz>`_
-
-   #. `Binary dataset part1, in total 272G inflated <https://huggingface.co/datasets/changliu8541/Assemblage_LinuxELF/resolve/main/binaries.tar.xz.partaa>`_
-   #. `Binary dataset part2, in total 272G inflated <https://huggingface.co/datasets/changliu8541/Assemblage_LinuxELF/resolve/main/binaries.tar.xz.partab>`_
-
+   https://huggingface.co/datasets/changliu8541/Assemblage_LinuxELF

@@ -1,4 +1,4 @@
-deployment_liunx
+deployment_linux
 ================
 
 
