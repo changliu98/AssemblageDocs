@@ -128,10 +128,13 @@ Optional: Recover dataset
 
     Assemblage can recover the state from previous running state and remake the binary dataset from the last state, which can be useful
     if the binary itself can not be distributed. To reload the previous state, grab some of the following recipe(in JSON format), and 
-    boot up the CLI, go to `loadrepo` option, and provide the JSON file, system will build the dataset from the provided file.
+    boot up the CLI, navigate to `loadrepo` option, and provide the JSON file, system will build the dataset from the provided file.
 
     :download:`sept25.json.zip <assets/sept25.json.zip>`
+    :download:`winpe_recipe.zip <assets/winpe_recipe.zip>`
+
 
     .. warning::
         The previous state is not guaranteed to be the same as the current state, as the repository may have been hidden/deleted, some binaries might not be recovered.
         Meanwhile, to accurately recover dataset from source code, a **full git clone** with all history will be performed, which will be extremely slow and resource consuming
+

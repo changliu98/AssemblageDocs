@@ -10,8 +10,9 @@ Overview
 Assemblage provides datasets on various build configurations, such as CPU arch, compiler, and optimization flags.
 Due to the nature of different tool chains, the datasets are distributed mainly based on the source and tool chain, such as vcpkg on Windows, and Github on Linux.
 
-You can find the `Datasheet <https://assemblage-dataset.net/assets/total-datasheet.pdf>`_ of the whole dataset
-
+.. image:: assets/pipeline.png
+  :width: 500
+  :alt: Dataset generation pipeline
 
 .. note::
     Currently we are only releaseing binaries built from repositories that have license.
@@ -20,11 +21,11 @@ You can find the `Datasheet <https://assemblage-dataset.net/assets/total-datashe
 +-------------+---------------+---------+-------+----------+
 | Data source | Compiler      | OS      | Count | Licensed |
 +=============+===============+=========+=======+==========+
-| GitHub      | Visual Studio | Windows | 960k  | 64k      |
+| GitHub      | Visual Studio | Windows | 960k  | 100k     |
 +-------------+---------------+---------+-------+----------+
 | GitHub      | GCC/Clang     | Linux   | 428k  | 211k     |
 +-------------+---------------+---------+-------+----------+
-| vcpkg       | Visual Studio | Windows | 29k   | 29k      |
+| vcpkg       | Visual Studio | Windows | 56k   | 56k      |
 +-------------+---------------+---------+-------+----------+
 
 
@@ -89,19 +90,38 @@ and some other useful SQL queries are as follows,
       WHERE binaries.id = some_id
       ORDER BY r.start ASC;
 
-Dataset location
+If you are not satisfying with SQLite's querying speed (which isn't fast indeed), you can also dump the database into SQL, then load into 
+other database you preferred.
+
+.. code-block:: sql
+
+   .output assemblage.sql
+   .dump
+   .quit
+
+Dataset Access
 ----------------
 
-The dataset is available at the following locations, currently hosted on Hugging Face,
+The dataset is available at the following locations, currently hosted on Hugging Face and Kaggle,
+
+#. Sample dataset (~600 binaries, 500MB):
+
+   https://www.kaggle.com/datasets/changliuh7rfs5/assemblage-sample
+
 
 #. Windows GitHub dataset (~100k, last update: May 27th):
 
    https://huggingface.co/datasets/changliu8541/Assemblage_PE
+   https://www.kaggle.com/datasets/changliuh7rfs5/assemblagedataset
 
-#. Windows vcpkg dataset (56k, last update: May 25th):
+
+#. Windows vcpkg dataset (56k, last update: May 25th; 110k newer dataset release planned):
 
    https://huggingface.co/datasets/changliu8541/Assemblage_vcpkgDLL
+   https://www.kaggle.com/datasets/changliuh7rfs5/assemblage-vcpkg
+
 
 #. Linux GitHub dataset (211k):
 
    https://huggingface.co/datasets/changliu8541/Assemblage_LinuxELF
+   https://www.kaggle.com/datasets/changliuh7rfs5/assemblagelinux
