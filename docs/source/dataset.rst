@@ -14,9 +14,6 @@ Due to the nature of different tool chains, the datasets are distributed mainly 
   :width: 500
   :alt: Dataset generation pipeline
 
-.. note::
-    Currently we are only releaseing binaries built from repositories that have license.
-
 
 +-------------+---------------+---------+-------+----------+
 | Data source | Compiler      | OS      | Count | Licensed |
@@ -27,6 +24,10 @@ Due to the nature of different tool chains, the datasets are distributed mainly 
 +-------------+---------------+---------+-------+----------+
 | vcpkg       | Visual Studio | Windows | 56k   | 56k      |
 +-------------+---------------+---------+-------+----------+
+
+.. note::
+   Currently we are only releaseing binaries built from repositories that have license.
+   Our dataset is published and distributed under CC BY-SA 4.0
 
 
 Distribution Format
@@ -112,16 +113,19 @@ The dataset is available at the following locations, currently hosted on Hugging
 #. Windows GitHub dataset (~100k, last update: May 27th):
 
    https://huggingface.co/datasets/changliu8541/Assemblage_PE
+   
    https://www.kaggle.com/datasets/changliuh7rfs5/assemblagedataset
 
 
 #. Windows vcpkg dataset (56k, last update: May 25th; 110k newer dataset release planned):
 
    https://huggingface.co/datasets/changliu8541/Assemblage_vcpkgDLL
+
    https://www.kaggle.com/datasets/changliuh7rfs5/assemblage-vcpkg
 
 
 #. Linux GitHub dataset (211k):
 
    https://huggingface.co/datasets/changliu8541/Assemblage_LinuxELF
+
    https://www.kaggle.com/datasets/changliuh7rfs5/assemblagelinux
