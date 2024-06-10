@@ -100,6 +100,29 @@ other database you preferred.
    .dump
    .quit
 
+Also, if you are using PDB files with IDA Pro,
+you need to sort out the file and put pdb files (sometimes the pdb file name also matters for IDA to realize that these pdbs are for the binary) along with binary file in one folder.
+
+.. code-block:: python
+
+   import ...
+
+   connection = sqlite3.connect("db.sqlite")
+   cursor = connection.cursor()
+   infos = cursor.execute('SELECT id, path, file_name, optimization, github_url, toolset_version FROM binaries;')
+   for binid, path, file_name, opt, github_url,toolset_version in tqdm(infos):
+      full_path = os.path.join(dataset_path, path.replace("\\", "/"))
+      if not os.path.isdir(os.path.join(flatten_dir, str(binid))):
+         os.makedirs(os.path.join(flatten_dir, str(binid)))
+      shutil.copy(full_path, os.path.join(flatten_dir, str(binid), file_name))
+      subcursor = connection.cursor()
+      pdbs = subcursor.execute('SELECT DISTINCT(pdb_path) FROM pdbs where binary_id = ?', (binid,))
+      for pdb in pdbs:
+         full_path = os.path.join(dataset_path, pdb[0].replace("\\", "/"))
+         shutil.copy(full_path, os.path.join(flatten_dir, str(binid), os.path.basename(os.path.basename(pdb[0]).split("_")[-1])))
+
+
+
 Dataset Access
 ----------------
 
@@ -129,3 +152,4 @@ The dataset is available at the following locations, currently hosted on Hugging
    https://huggingface.co/datasets/changliu8541/Assemblage_LinuxELF
 
    https://www.kaggle.com/datasets/changliuh7rfs5/assemblagelinux
+
