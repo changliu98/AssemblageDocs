@@ -18,17 +18,16 @@ Due to the nature of different tool chains, the datasets are distributed mainly 
 +-------------+---------------+---------+-------+----------+
 | Data source | Compiler      | OS      | Count | Licensed |
 +=============+===============+=========+=======+==========+
-| GitHub      | Visual Studio | Windows | 960k  | 100k     |
+| GitHub      | Visual Studio | Windows | 960k  | 120k     |
 +-------------+---------------+---------+-------+----------+
 | GitHub      | GCC/Clang     | Linux   | 428k  | 211k     |
 +-------------+---------------+---------+-------+----------+
-| vcpkg       | Visual Studio | Windows | 56k   | 56k      |
+| vcpkg       | Visual Studio | Windows | 130k  | 130k     |
 +-------------+---------------+---------+-------+----------+
 
 .. note::
-   Currently we are only releaseing binaries built from repositories that have license.
-   Our dataset is published and distributed under CC BY-SA 4.0
-
+   Currently we are only releaseing binaries built from repositories that have license. 
+   Please adhere to the license of the original repositories when using the dataset.
 
 Distribution Format
 -------------------
