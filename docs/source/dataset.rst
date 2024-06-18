@@ -139,11 +139,11 @@ The dataset is available at the following locations, currently hosted on Hugging
    https://www.kaggle.com/datasets/changliuh7rfs5/assemblagedataset
 
 
-#. Windows vcpkg dataset:
+#. Windows vcpkg dataset (130k, last update June 12):
 
-   https://huggingface.co/datasets/changliu8541/Assemblage_vcpkgDLL, 130k, last update June 12
+   https://huggingface.co/datasets/changliu8541/Assemblage_vcpkgDLL
 
-   https://www.kaggle.com/datasets/changliuh7rfs5/assemblage-vcpkg, 56k, last update May 25th due to Kaggle size limit
+   https://www.kaggle.com/datasets/changliuh7rfs5/assemblage-vcpkg
 
 
 #. Linux GitHub dataset (211k):
