@@ -14,3 +14,4 @@ Contents
    deployment_linux
    deployment_windows
    deployment_vcpkg
+   api_reference

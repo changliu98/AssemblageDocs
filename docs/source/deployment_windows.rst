@@ -1,5 +1,5 @@
-deployment_windows
-==================
+Deployment on Windows
+=====================
 
 
 .. autosummary::

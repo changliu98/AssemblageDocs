@@ -1,5 +1,5 @@
-deployment_vcpkg
-==================
+Deployment of vcpkg Worker
+==========================
 
 
 .. autosummary::

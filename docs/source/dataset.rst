@@ -1,5 +1,5 @@
-dataset
-=======
+Dataset Access
+===============
 
 .. autosummary::
    :toctree: generated
@@ -139,14 +139,14 @@ The dataset is available at the following locations, currently hosted on Hugging
    https://www.kaggle.com/datasets/changliuh7rfs5/assemblagedataset
 
 
-#. Windows vcpkg dataset (130k, last update June 12):
+#. Windows vcpkg dataset (130k, last update June 12th):
 
    https://huggingface.co/datasets/changliu8541/Assemblage_vcpkgDLL
 
    https://www.kaggle.com/datasets/changliuh7rfs5/assemblage-vcpkg
 
 
-#. Linux GitHub dataset (211k):
+#. Linux GitHub dataset (211k, last updated July 20th):
 
    https://huggingface.co/datasets/changliu8541/Assemblage_LinuxELF
 
