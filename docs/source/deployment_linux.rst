@@ -44,13 +44,18 @@ Please make sure these are installed, or you have access to:
     you can declare the workers, crawlers and the database connection in this file.
 
 
-3.  Install local dependencies, and start local clusters. The cluster file will create Docker images and boot up containers for you.
+3.  Install local dependencies, and run the cluster file, it will create Docker images.
 
             .. code-block:: bash
     
                 pip install -r requirements.txt
                 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python3 example_cluster.py
 
+4.  Boot up the coordinators
+
+            .. code-block:: bash
+    
+                docker compose up
 
 Optional: Recover dataset
 -------------------------

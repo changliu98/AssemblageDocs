@@ -39,35 +39,51 @@ Then, provide this class to the `builder` function to `AssmeblageCluster`.
 
 .. code-block:: python
 
-   class RustBuild(BuildStartegy):
-      def run_build(self, repo, target_dir, build_mode, library, optimization,
-                        slnfile, platform, compiler_version):
-         """ just cargo build """
-         cmd = f"cd {target_dir} && RUSTFLAGS=-g cargo build --release"
-         return BuildStartegy.cmd_with_output(cmd, 600, platform)
-      
-      def is_valid_binary(self, binary_path):
-         if 'build_script_build' in binary_path or 'build-script-build' in binary_path \
-               or 'build_script_main' in binary_path \
-               or 'build-script-main' in binary_path:
-               return False
-         return True
+   class SampleBuild(BuildStartegy):
 
-   test_cluster_rust = AssmeblageCluster(name="test"). \
-                  build_system_analyzer(lambda x:"cargo"). \
+      def clone_data(self, repo):
+         clonedir = os.urandom(8).hex()
+         out, err, exit_code = cmd_with_output(f'git clone {repo["url"]} {clonedir}', 600, "linux")
+         return_code = BuildStatus.SUCCESS if exit_code == 0 else BuildStatus.FAILED
+         return out, return_code, clonedir
+
+
+
+      def run_build(self, repo, target_dir, compiler_version,
+                     library, build_mode,
+                     optimization, platform, slnfile):
+         """ how to constuct a build command  """
+         files = []
+         for filename in glob.iglob(target_dir + '**/**', recursive=True):
+               files.append(filename.split("/")[-1])
+         logging.info("%s files in repo", len(files))
+         build_tool = get_build_system(files)
+         cmd = f'cd {target_dir} && make -j16'
+         logging.info("Linux cmd generated: %s", cmd)
+         logging.info("Files found %s", os.listdir(target_dir))
+         out, err, exit_code = cmd_with_output(cmd, 600, platform)
+         return_code = BuildStatus.SUCCESS if exit_code == 0 else BuildStatus.FAILED
+         return out.decode() + err.decode(), return_code
+
+      def post_build_hook(self, dest_binfolder, build_mode, library, repoinfo, toolset,
+                           optimization, commit_hexsha):
+         logging.info(os.listdir(dest_binfolder))
+         logging.info("Maybe move files to some Docker mapped volume")
+         os.system(f"mv {dest_binfolder} /binaries/{repoinfo['name']}")
+
+   test_cluster_c = AssmeblageCluster(name="sample"). \
                   aws(aws_profile). \
                   docker_network("assemblage-net", True). \
                   message_broker(). \
                   mysql(). \
-                  scraper([github_rust_repo]). \
+                  scraper([github_c_repos]). \
                   build_option(
-                     1, platform="linux", language="rust", 
-                     compiler_name="rustc",
-                     build_system="cargo"). \
+                     1, platform="linux", language="c++", 
+                     compiler_name="clang",
+                     build_system="all"). \
                   builder(
-                     platform="linux", compiler="rustc", build_opt=1,
-                     docker_image="stargazermiao/rust",
-                     custom_build_method=RustBuild(),
+                     platform="linux", compiler="clang", build_opt=1,
+                     custom_build_method=SampleBuild(),
                      aws_profile= aws_profile). \
                   use_new_mysql_local()
 
