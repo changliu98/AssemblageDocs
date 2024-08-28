@@ -135,6 +135,5 @@ Optional: Recover dataset
 
 
     .. warning::
-        The previous state is not guaranteed to be the same as the current state, as the repository may have been hidden/deleted, some binaries might not be recovered.
-        Meanwhile, to accurately recover dataset from source code, a **full git clone** with all history will be performed, which will be extremely slow and resource consuming
-
+        The dataset restoration process does **not** guarante generating exact same binaries, as the repository may have been hidden/deleted, some binaries might not be recovered, compiling and building same source code will generate slightly different binaries.
+        Please to be noted, to accurately recover dataset from source code, a **full git clone** with all history will be performed, which will be extremely slow and have high consumption of bandwidth and CPU resource.

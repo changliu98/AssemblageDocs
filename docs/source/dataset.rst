@@ -34,8 +34,8 @@ Distribution Format
 
 The dataset is distributed in the following format:
 
-#. A compressed file containing the binaries
-#. A SQLite database containing the metadata of the binaries
+#. A compressed file of the binaries
+#. A SQLite database containing the metadata (GitHub url, functions address, source codes, etc.) of the binaries
 
 .. image:: assets/sqlite_schema.png
   :width: 800
@@ -43,6 +43,9 @@ The dataset is distributed in the following format:
 
 You can find the detailed schema also in the Datasheet. While the database provides detailed information about the binaries,
 the compressed file contains the binaries themselves. The binaries are stored in the location indicated by the ``path`` field in the database.
+
+Use Assemblage with Python and SQLite
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Also, you may need to use some Python modules to load function related data from the SQLite database for faster access. The following code snippet shows how to load data from the SQLite database into dataframe,
 
@@ -90,6 +93,9 @@ and some other useful SQL queries are as follows,
       WHERE binaries.id = some_id
       ORDER BY r.start ASC;
 
+Dump SQL file
+~~~~~~~~~~~~~
+
 If you are not satisfying with SQLite's querying speed (which isn't fast indeed), you can also dump the database into SQL, then load into 
 other database you preferred.
 
@@ -99,8 +105,21 @@ other database you preferred.
    .dump
    .quit
 
-Also, if you are using PDB files with IDA Pro,
-you need to sort out the file and put pdb files (sometimes the pdb file name also matters for IDA to realize that these pdbs are for the binary) along with binary file in one folder.
+License information
+~~~~~~~~~~~~~~~~~~~
+
+We are also providing the license information as a JSON file for your convenience (each GitHub URL maps to its license), and the file can be found here
+
+   :download:`license.json <assets/license.json>`
+
+
+Tips on PDB files
+~~~~~~~~~~~~~~~~~
+
+
+If you are using PDB files with IDA Pro, 
+you need to sort out the file and put pdb files (sometimes the pdb file name also matters for IDA to realize that these pdbs are for the binary) 
+along with binary file in one folder.
 
 .. code-block:: python
 
