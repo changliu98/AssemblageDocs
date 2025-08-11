@@ -22,11 +22,10 @@ Coordinator Setup
 
 Please make sure these are installed, or you have access to:
 
-#. Docker
-#. Docker Compose
+#. Docker and Docker Compose
 #. Git
-#. Port 5672, 50052
-#. A GitHub account, and a personal access token
+#. Port 5672, 50052 is accessile by the workder instances
+#. A GitHub account, and its personal access token
 
 .. warning::
     You should put you server under firewall and limit the access to these ports, also make sure these ports are accessile by your worker instances
@@ -40,7 +39,7 @@ Please make sure these are installed, or you have access to:
 
 2.  Modify the cluster file
 
-    You can find examples located under `example_workers`. We will use `example_cluster.py` as example,
+    You can find examples located under `example_workers`. We will use `example_cluster.py`,
     you can declare the workers, crawlers and the database connection in this file.
 
 
