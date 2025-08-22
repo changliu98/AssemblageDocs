@@ -26,7 +26,7 @@ Due to the nature of different tool chains, the datasets are distributed mainly 
 +-------------+---------------+---------+-------+----------+
 
 .. note::
-   Currently we are only releaseing binaries built from repositories that have license. 
+   Currently we are only releasing binaries built from repositories that have license. 
    Please adhere to the license of the original repositories when using the dataset.
 
 Distribution Format
@@ -95,9 +95,8 @@ and some other useful SQL queries are as follows,
 
 Dump SQL file
 ~~~~~~~~~~~~~
-
-If you are not satisfying with SQLite's querying speed (which isn't fast indeed), you can also dump the database into SQL, then load into 
-other database you preferred.
+If you are not satisfying with SQLite's querying speed (which is slow compared to other database servers), you can also dump the database into SQL, then load into 
+your preferred database solution.
 
 .. code-block:: sql
 
@@ -106,9 +105,9 @@ other database you preferred.
    .quit
 
 License information
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
-We are also providing the license information as a JSON file for your convenience (each GitHub URL maps to its license), and the file can be found here
+We are also provide the license information as a JSON file for your convenience (each GitHub URL maps to its license). The file can be found here
 
    :download:`license.json <assets/license.json>`
 

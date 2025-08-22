@@ -12,7 +12,7 @@ While Assemblage provides a range of functionalities out of the box,
 you may want to customize the behavior of Assemblage by providing your own configurations, 
 or implement your own classes of the Assemblage API.
 
-If you want to use the Linux worker, simply extend the class `BuildStartegy`. There are example 
+If you want to use the Linux worker, simply extend the class `BuildStrategy`. There are example 
 implementations in the `example_workers` folder. Then the booting of Docker containers are handled
 automatically.
 
@@ -26,20 +26,20 @@ coordinator, or use the standalone worker.
     there are other ways worker can get the tasks, such as reading from a database or some file.
 
 
-Classese and Functions
+Classes and Functions
 ----------------------
 
 For Linux
 ~~~~~~~~~~~~
 
-The class `BuildStartegy` defines the behavior of the worker. You can extend this class to implement your own.
-Then, provide this class to the `builder` function to `AssmeblageCluster`.
+The class `BuildStrategy` defines the behavior of the worker. You can extend this class to implement your own.
+Then, provide this class to the `builder` function to `AssemblageCluster`.
 
 
 
 .. code-block:: python
 
-   class SampleBuild(BuildStartegy):
+   class SampleBuild(BuildStrategy):
 
       def clone_data(self, repo):
          clonedir = os.urandom(8).hex()
@@ -52,7 +52,7 @@ Then, provide this class to the `builder` function to `AssmeblageCluster`.
       def run_build(self, repo, target_dir, compiler_version,
                      library, build_mode,
                      optimization, platform, slnfile):
-         """ how to constuct a build command  """
+         """ how to construct a build command  """
          files = []
          for filename in glob.iglob(target_dir + '**/**', recursive=True):
                files.append(filename.split("/")[-1])
@@ -71,7 +71,7 @@ Then, provide this class to the `builder` function to `AssmeblageCluster`.
          logging.info("Maybe move files to some Docker mapped volume")
          os.system(f"mv {dest_binfolder} /binaries/{repoinfo['name']}")
 
-   test_cluster_c = AssmeblageCluster(name="sample"). \
+   test_cluster_c = AssemblageCluster(name="sample"). \
                   aws(aws_profile). \
                   docker_network("assemblage-net", True). \
                   message_broker(). \
@@ -91,23 +91,23 @@ Then, provide this class to the `builder` function to `AssmeblageCluster`.
 For Windows
 ~~~~~~~~~~~~~~
 
-Similar to the Linux worker, you can extend the class `BuildStartegy` to implement your own behavior. 
-Then, provide this class to the `builder` function to `AssmeblageCluster`.
+Similar to the Linux worker, you can extend the class `BuildStrategy` to implement your own behavior. 
+Then, provide this class to the `builder` function to `AssemblageCluster`.
 
-Meanwhile, a seperated `StandaloneBuilder` is provided to handle some complex build processes without coordinator, 
+Meanwhile, a separated `StandaloneBuilder` is provided to handle some complex build processes without coordinator, 
 such as the tasks that require complicated configuration to finish rather than calling `MSBuild`.
 
 .. code-block:: python
 
-   class ZLib(BuildStartegy):
+   class ZLib(BuildStrategy):
       def run_build(self, repo, target_dir, build_mode, library, optimization,
                         slnfile, platform, compiler_version):
          cmd = f"cd {target_dir} && cmake  -G \"Visual Studio 16 2019\" -A x64 -DCMAKE_BUILD_TYPE=Release ."
-         out, err, ret = BuildStartegy.cmd_with_output(cmd, 600, platform)
+         out, err, ret = BuildStrategy.cmd_with_output(cmd, 600, platform)
          if ret != 0:
                return out, err, ret
          cmd = f"cd {target_dir} && cmake --build . --config Release"
-         return BuildStartegy.cmd_with_output(cmd, 600, platform)
+         return BuildStrategy.cmd_with_output(cmd, 600, platform)
       
       def is_valid_binary(self, binary_path):
          if binary_path.endswith(".pdb") or binary_path.endswith(".dll"):

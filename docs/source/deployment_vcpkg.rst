@@ -11,7 +11,7 @@ About vcpkg
 `vcpkg <https://vcpkg.io>`_ is a package manager, just like apt or yum, but for C++ libraries. 
 It has integration with Visual Studio, and it is cross-platform, but we will primarily use it on Windows to collect Dynamic link library (DLL) files
 Because building these dll files are extremely computing intensive, and the projects hosted are limiting (~2000 projects), there is no need for high concurrency for our system.
-And vcpkg worker are implemented as standlone python scripts, so it is very easy to deploy.
+And vcpkg worker are implemented as standalone python scripts, so it is very easy to deploy.
 
 Worker environment setup
 ------------------------
