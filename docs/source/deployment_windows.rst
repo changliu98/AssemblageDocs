@@ -8,8 +8,8 @@ Deployment on Windows
 Intro
 --------
 
-While deployment on Linux system is more convenient, the deployment on Windows is more complicated due to the nature of Windows system, that can't be packed as images for distribution.
-To deoloy Assemblage and harvest , you need to deploy the coordinator to a server, then set up workers on Windows instances.
+Deployment on Linux system is more convenient. Deployment on Windows is possible but more complicated due to the nature of Windows system, and they can't be packed as images for distribution.
+To deploy Assemblage and harvest, you need to deploy the coordinator to a server, then set up workers on Windows instances.
 
 
 Coordinator Setup
@@ -24,7 +24,7 @@ Please make sure these are installed, or you have access to:
 #. A GitHub account, and a personal access token
 
 .. warning::
-    You should put you server under firewall and limit the access to these ports, also make sure these ports are accessile by your worker instances
+    You should put you server under firewall and limit the access to these ports, also make sure these ports are accessible by your worker instances
 
 .. note::
     By default, only repositories that have licenses will be used to build binaries
@@ -37,7 +37,7 @@ Please make sure these are installed, or you have access to:
             cd Assemblage
 
 
-#.  Install local dependencies, and schange the crawler, coordinator configurations, which is locating under `/assemblage/configure/` folder. 
+#.  Install local dependencies, and change the crawler, coordinator configurations, which is locating under `/assemblage/configure/` folder. 
     You can also change the location of these config files, just remember to also update the `docker-compose.yml` file
 
         .. code-block:: bash
@@ -59,7 +59,7 @@ Please make sure these are installed, or you have access to:
 Worker Setup   
 ------------
 
-Windows worker requires many software to be installed, and the installation is not as simple as Linux worker. 
+The Windows worker requires many software packages to be installed, and the installation is not as simple as Linux worker. 
 Here is the step-by-step guide to set up a Windows worker
 
 #. Install/build the software:
@@ -86,7 +86,7 @@ Here is the step-by-step guide to set up a Windows worker
 
     .. code-block:: bash
 
-        # Need administator pivilage
+        # Need administrator privileges
         regsvr32 "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\DIA SDK\bin\msdia140.dll"
         regsvr32 "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildCommunityTools\DIA SDK\bin\amd64\msdia140.dll"
 
@@ -135,5 +135,5 @@ Optional: Recover dataset
 
 
     .. warning::
-        The dataset restoration process does **not** guarante generating exact same binaries, as the repository may have been hidden/deleted, some binaries might not be recovered, compiling and building same source code will generate slightly different binaries.
+        The dataset restoration process does **not** guarantee generating exact same binaries, as the repository may have been hidden/deleted, some binaries might not be recovered, compiling and building same source code will generate slightly different binaries.
         Please to be noted, to accurately recover dataset from source code, a **full git clone** with all history will be performed, which will be extremely slow and have high consumption of bandwidth and CPU resource.

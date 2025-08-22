@@ -28,7 +28,7 @@ Please make sure these are installed, or you have access to:
 #. A GitHub account, and its personal access token
 
 .. warning::
-    You should put you server under firewall and limit the access to these ports, also make sure these ports are accessile by your worker instances
+    You should put your server under a firewall and limit the access to these ports, also make sure these ports are accessible by your worker instances
 
 1.  Clone the repository
     
