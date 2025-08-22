@@ -8,7 +8,7 @@ Deployment on Windows
 Intro
 --------
 
-Deployment on Linux system is more convenient. Deployment on Windows is possible but more complicated due to the nature of Windows system, that can't be packed as images for distribution.
+Deployment on Linux system is more convenient. Deployment on Windows is possible but more complicated due to the nature of Windows system, and they can't be packed as images for distribution.
 To deploy Assemblage and harvest, you need to deploy the coordinator to a server, then set up workers on Windows instances.
 
 
