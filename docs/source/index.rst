@@ -22,14 +22,14 @@ Documentation Section
 Contact us:
 -----------
 
-To contact us about datasets access, deployment, or any other questions, please email us at:
+To contact us about datasets access, deployment, or any other questions, please email current maintainers by:
 
 | Kristopher Micinski: kkmicins@syr.edu 
 | Chang Liu: cliu57@syr.edu 
-| Naveen Ashok: nashok@syr.edu
+| Alex Duly: apduly@syr.edu
 
 
-Here are the email addresses of all authors (which you can also find on our paper):
+Here are the email addresses of all contributors to this project:
 
 | Chang Liu: cliu57@syr.edu 
 | Rebecca Saul: Saul_Rebecca@bah.com
@@ -38,6 +38,7 @@ Here are the email addresses of all authors (which you can also find on our pape
 | Maya Fuchs: fuchs_maya@bah.com
 | Townsend Southard Pantano: tgsoutha@syr.edu
 | Naveen Ashok: nashok@syr.edu
+| Alex Duly: apduly@syr.edu
 | James Holt: holt@lps.umd.edu
 | Kristopher Micinski: kkmicins@syr.edu 
 
