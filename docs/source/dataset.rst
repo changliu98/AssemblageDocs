@@ -138,7 +138,8 @@ along with binary file in one folder.
          full_path = os.path.join(dataset_path, pdb[0].replace("\\", "/"))
          shutil.copy(full_path, os.path.join(flatten_dir, str(binid), os.path.basename(os.path.basename(pdb[0]).split("_")[-1])))
 
-
+.. warning::
+   **Linux dataset GCC-Oz optimization** Updated November 12th 2025: I discovered that there may be an issue with passing the -Oz flag to the GCC compiler in the Linux dataset. As a result, binaries marked as '-Oz' optimization may have actually been built with '-Os', or with the repository's original optimization compiler flag. Please keep this limitation in mind when interpreting the data, and I sincerely apologize for this error.
 
 Dataset Access
 ----------------
