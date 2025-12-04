@@ -139,7 +139,9 @@ along with binary file in one folder.
          shutil.copy(full_path, os.path.join(flatten_dir, str(binid), os.path.basename(os.path.basename(pdb[0]).split("_")[-1])))
 
 .. warning::
-   **Linux dataset GCC-Oz optimization** Updated November 2025: There may be an issue with passing the -Oz flag to the GCC compiler in the Linux dataset; and binaries marked as '-Oz' optimization may have actually been built with '-Os', or with the repository's original Makefile compiler flag. An update to the dataset has been made with new GCC-O2 binaries.
+   **Linux dataset GCC -Oz optimization** (Updated November 2025)
+   An issue has been identified with the `-Oz` flag in the Linux dataset: binaries labeled as being built with `-Oz` may actually have been compiled with `-Os` or with the compiler flags defined in the repository’s original Makefile. To address this, the dataset has been updated with newly generated GCC `-O2` binaries.
+   If your work is sensitive to optimization levels, please use the Clang or GCC binaries built with  optimization levels: `O0`, `O1`, `O2`, and `O3`.
 
 Dataset Access
 ----------------
