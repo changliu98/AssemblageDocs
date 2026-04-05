@@ -140,8 +140,7 @@ along with binary file in one folder.
 
 .. warning::
    **Linux dataset GCC -Oz optimization** (Updated November 2025)
-   An issue has been identified with the `-Oz` flag in the Linux dataset: binaries labeled as being built with `-Oz` may actually have been compiled with `-Os` or with the compiler flags defined in the repository’s original Makefile. To address this, the dataset has been updated with newly generated GCC `-O2` binaries.
-   If your work is sensitive to optimization levels, please use the Clang or GCC binaries built with  optimization levels: `O0`, `O1`, `O2`, and `O3`.
+   An issue has been identified with the `-Oz` flag in the Linux dataset: binaries labeled as being built with `-Oz` may actually have been compiled with `-Os` or with the compiler flags defined in the repository's original Makefile. To address this, the dataset has been updated with newly generated GCC `-O2` binaries.
 
 Dataset Access
 ----------------
@@ -153,21 +152,21 @@ The dataset is available at the following locations, currently hosted on Hugging
    https://www.kaggle.com/datasets/changliuh7rfs5/assemblage-sample
 
 
-#. Windows GitHub dataset (~100k, last update: May 27th):
+#. Windows GitHub dataset (~100k, last update 2025 May 27th):
 
    https://huggingface.co/datasets/changliu8541/Assemblage_PE
    
    https://www.kaggle.com/datasets/changliuh7rfs5/assemblagedataset
 
 
-#. Windows vcpkg dataset (130k, last update June 12th):
+#. Windows vcpkg dataset (130k, last update 2024 June 12th):
 
    https://huggingface.co/datasets/changliu8541/Assemblage_vcpkgDLL
 
    https://www.kaggle.com/datasets/changliuh7rfs5/assemblage-vcpkg
 
 
-#. Linux GitHub dataset (211k, last updated July 20th):
+#. Linux GitHub dataset (250k, last updated 2026 Apr 5th):
 
    https://huggingface.co/datasets/changliu8541/Assemblage_LinuxELF
 
