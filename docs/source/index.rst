@@ -6,7 +6,6 @@ It is built to provide high-quality labeled metadata for the purposes of buildin
 
 You can find our paper at https://arxiv.org/abs/2405.03991, and our deployment/dataset docs at this website.
 
-
 Documentation Section
 ------------------------
 
@@ -26,20 +25,18 @@ To contact us about datasets access, deployment, or any other questions, please 
 
 | Kristopher Micinski: kkmicins@syr.edu 
 | Chang Liu: cliu57@syr.edu 
-| Alex Duly: apduly@syr.edu
 
+Here are the email addresses of all contributors to this project by last name:
 
-Here are the email addresses of all contributors to this project:
-
-| Chang Liu: cliu57@syr.edu 
-| Rebecca Saul: Saul_Rebecca@bah.com
-| Yihao Sun: ysun67@syr.edu
-| Edward Raff: Raff.Edward@gmail.com
-| Maya Fuchs: fuchs_maya@bah.com
-| Townsend Southard Pantano: tgsoutha@syr.edu
 | Naveen Ashok: nashok@syr.edu
 | Alex Duly: apduly@syr.edu
+| Maya Fuchs: fuchs_maya@bah.com
 | James Holt: holt@lps.umd.edu
+| Mia Kerchen: mhkerche@syr.edu
+| Chang Liu: cliu57@syr.edu
 | Kristopher Micinski: kkmicins@syr.edu 
-
+| Townsend Southard Pantano: tgsoutha@syr.edu
+| Edward Raff: Raff.Edward@gmail.com
+| Rebecca Saul: Saul_Rebecca@bah.com
+| Yihao Sun: ysun67@syr.edu
 
