@@ -145,7 +145,8 @@ along with binary file in one folder.
 Dataset Access
 ----------------
 
-The dataset is available at the following locations, currently hosted on Hugging Face and Kaggle,
+The dataset is hosted on Hugging Face.
+Due to file size limit, we are deprecating the dataset hosting on Kaggle.
 
 #. Sample dataset (~600 binaries, 500MB):
 
@@ -156,19 +157,14 @@ The dataset is available at the following locations, currently hosted on Hugging
 
    https://huggingface.co/datasets/changliu8541/Assemblage_PE
    
-   https://www.kaggle.com/datasets/changliuh7rfs5/assemblagedataset
-
 
 #. Windows vcpkg dataset (130k, last update 2024 June 12th):
 
    https://huggingface.co/datasets/changliu8541/Assemblage_vcpkgDLL
-
-   https://www.kaggle.com/datasets/changliuh7rfs5/assemblage-vcpkg
 
 
 #. Linux GitHub dataset (250k, last updated 2026 Apr 5th):
 
    https://huggingface.co/datasets/changliu8541/Assemblage_LinuxELF
 
-   https://www.kaggle.com/datasets/changliuh7rfs5/assemblagelinux
 
