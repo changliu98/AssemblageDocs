@@ -19,7 +19,7 @@ Due to the nature of different tool chains, the datasets are distributed mainly 
    Please adhere to the license of the original repositories when using the dataset.
 
 Distribution Format
--------------------
+---------------------
 
 The dataset is distributed in the following format:
 
@@ -30,60 +30,11 @@ The dataset is distributed in the following format:
   :width: 800
   :alt: SQLite database schema
 
-You can find the detailed schema also in the Datasheet. While the database provides detailed information about the binaries,
-the compressed file contains the binaries themselves. The binaries are stored in the location indicated by the ``path`` field in the database.
+You can find the detailed schema by querying database. 
+The database provides detailed information about the binaries, the compressed file contains the binaries themselves. 
+The binaries are stored in the location indicated by the ``path`` field in the database.
 
-Use Assemblage with Python and SQLite
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Also, you may need to use some Python modules to load function related data from the SQLite database for faster access. The following code snippet shows how to load data from the SQLite database into dataframe,
-
-.. code-block:: python
-
-      import sqlite3
-      import pandas as pd
-   
-      conn = sqlite3.connect('path/to/sqlite.db')
-      df = pd.read_sql_query("SELECT f.name, r.start\
-                              FROM rvas r\
-                              JOIN functions f ON r.function_id = f.id\
-                              JOIN binaries ON f.binary_id = binaries.id\
-                              WHERE binaries.id = some_id\
-                              ORDER BY r.start ASC;", conn)
-      conn.close()
-   
-      print(df.head())
-
-and some other useful SQL queries are as follows,
-
-.. code-block:: sql
-
-      -- Count functions of binaries size more than 100KB
-      SELECT COUNT(*) FROM functions
-      WHERE binary_id IN (SELECT id FROM binaries WHERE size>100);
-
-      -- Select binary information and RVA by function id:
-      SELECT f.id, f.name, r.start, 
-      b.id, b.toolset_version, b.optimization, b.github_url
-      FROM functions
-      WHERE functions.id=some_id 
-      JOIN rvas r ON r.function_id=f.id 
-      JOIN binaries b ON b.id=f.binary_id;
-
-      -- Dump all function name, rva address and binary id:
-      SELECT f.name, f.binary_id, r.start 
-      FROM functions f JOIN rvas r ON f.id==r.function_id;
-
-      -- Dump ascending function name and rva starts for binary some_id
-      SELECT f.name,  r.start
-      FROM rvas r
-      JOIN functions f ON r.function_id = f.id
-      JOIN binaries ON f.binary_id = binaries.id
-      WHERE binaries.id = some_id
-      ORDER BY r.start ASC;
-
-Dump SQL file
-~~~~~~~~~~~~~
 If you are not satisfying with SQLite's querying speed (which is slow compared to other database), you can also dump the database into SQL, then load into 
 your preferred database solution.
 
@@ -93,9 +44,15 @@ your preferred database solution.
    .dump
    .quit
 
-.. warning::
-   **Linux dataset GCC -Oz optimization** (Updated November 2025)
-   An issue has been identified with the `-Oz` flag in the Linux dataset: binaries labeled as being built with `-Oz` may have been compiled with `-Os` or with the compiler flags defined in the repository's original Makefile. To address this, the dataset has been updated with newly generated GCC `-O2` binaries.
+
+Major Changes
+---------------
+
+#. Linux dataset GCC -Oz optimization issue (November 2025). 
+   An issue has been identified with the `-Oz` flag in the Linux dataset: binaries labeled as being built with `-Oz` may have been compiled with `-Os` or with the compiler flags defined in the repository's original Makefile. The dataset has been updated with newly generated GCC `-O2` binaries, other flags are not impacted.
+
+#. Introduce Deephistory dataset (May 2026). 
+   We have introduced a new dataset, which contains binaries built from repositories with a long history of commits. This dataset is designed to facilitate research on binary evolution and testing.
 
 Dataset Access
 ----------------
@@ -103,7 +60,7 @@ Dataset Access
 The dataset is hosted on Hugging Face.
 Due to file size limit, we are deprecating the dataset hosting on Kaggle.
 
-#. Windows GitHub dataset (~100k, last update 2025 May):
+#. Windows GitHub dataset (88k, last update 2025 May):
 
    https://huggingface.co/datasets/changliu8541/Assemblage_PE
    
@@ -120,4 +77,4 @@ Due to file size limit, we are deprecating the dataset hosting on Kaggle.
 
 #. Deep History dataset (73k, last updated 2026 May):
 
-   https://huggingface.co/datasets/changliu8541/Assemblage_LinuxELF
+   https://huggingface.co/datasets/changliu8541/assemblage-deephistory
