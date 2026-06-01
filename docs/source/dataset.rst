@@ -14,17 +14,6 @@ Due to the nature of different tool chains, the datasets are distributed mainly 
   :width: 500
   :alt: Dataset generation pipeline
 
-
-+-------------+---------------+---------+-------+----------+
-| Data source | Compiler      | OS      | Count | Licensed |
-+=============+===============+=========+=======+==========+
-| GitHub      | Visual Studio | Windows | 960k  | 120k     |
-+-------------+---------------+---------+-------+----------+
-| GitHub      | GCC/Clang     | Linux   | 428k  | 211k     |
-+-------------+---------------+---------+-------+----------+
-| vcpkg       | Visual Studio | Windows | 130k  | 130k     |
-+-------------+---------------+---------+-------+----------+
-
 .. note::
    Currently we are only releasing binaries built from repositories that have license. 
    Please adhere to the license of the original repositories when using the dataset.
@@ -95,7 +84,7 @@ and some other useful SQL queries are as follows,
 
 Dump SQL file
 ~~~~~~~~~~~~~
-If you are not satisfying with SQLite's querying speed (which is slow compared to other database servers), you can also dump the database into SQL, then load into 
+If you are not satisfying with SQLite's querying speed (which is slow compared to other database), you can also dump the database into SQL, then load into 
 your preferred database solution.
 
 .. code-block:: sql
@@ -104,43 +93,9 @@ your preferred database solution.
    .dump
    .quit
 
-License information
-~~~~~~~~~~~~~~~~~~
-
-We are also provide the license information as a JSON file for your convenience (each GitHub URL maps to its license). The file can be found here
-
-   :download:`license.json <assets/license.json>`
-
-
-Tips on PDB files
-~~~~~~~~~~~~~~~~~
-
-
-If you are using PDB files with IDA Pro, 
-you need to sort out the file and put pdb files (sometimes the pdb file name also matters for IDA to realize that these pdbs are for the binary) 
-along with binary file in one folder.
-
-.. code-block:: python
-
-   import ...
-
-   connection = sqlite3.connect("db.sqlite")
-   cursor = connection.cursor()
-   infos = cursor.execute('SELECT id, path, file_name, optimization, github_url, toolset_version FROM binaries;')
-   for binid, path, file_name, opt, github_url,toolset_version in tqdm(infos):
-      full_path = os.path.join(dataset_path, path.replace("\\", "/"))
-      if not os.path.isdir(os.path.join(flatten_dir, str(binid))):
-         os.makedirs(os.path.join(flatten_dir, str(binid)))
-      shutil.copy(full_path, os.path.join(flatten_dir, str(binid), file_name))
-      subcursor = connection.cursor()
-      pdbs = subcursor.execute('SELECT DISTINCT(pdb_path) FROM pdbs where binary_id = ?', (binid,))
-      for pdb in pdbs:
-         full_path = os.path.join(dataset_path, pdb[0].replace("\\", "/"))
-         shutil.copy(full_path, os.path.join(flatten_dir, str(binid), os.path.basename(os.path.basename(pdb[0]).split("_")[-1])))
-
 .. warning::
    **Linux dataset GCC -Oz optimization** (Updated November 2025)
-   An issue has been identified with the `-Oz` flag in the Linux dataset: binaries labeled as being built with `-Oz` may actually have been compiled with `-Os` or with the compiler flags defined in the repository's original Makefile. To address this, the dataset has been updated with newly generated GCC `-O2` binaries.
+   An issue has been identified with the `-Oz` flag in the Linux dataset: binaries labeled as being built with `-Oz` may have been compiled with `-Os` or with the compiler flags defined in the repository's original Makefile. To address this, the dataset has been updated with newly generated GCC `-O2` binaries.
 
 Dataset Access
 ----------------
@@ -148,23 +103,21 @@ Dataset Access
 The dataset is hosted on Hugging Face.
 Due to file size limit, we are deprecating the dataset hosting on Kaggle.
 
-#. Sample dataset (~600 binaries, 500MB):
-
-   https://www.kaggle.com/datasets/changliuh7rfs5/assemblage-sample
-
-
-#. Windows GitHub dataset (~100k, last update 2025 May 27th):
+#. Windows GitHub dataset (~100k, last update 2025 May):
 
    https://huggingface.co/datasets/changliu8541/Assemblage_PE
    
 
-#. Windows vcpkg dataset (130k, last update 2024 June 12th):
+#. Windows vcpkg dataset (130k, last update 2024 June):
 
    https://huggingface.co/datasets/changliu8541/Assemblage_vcpkgDLL
 
 
-#. Linux GitHub dataset (250k, last updated 2026 Apr 5th):
+#. Linux GitHub dataset (250k, last updated 2026 Apr):
 
    https://huggingface.co/datasets/changliu8541/Assemblage_LinuxELF
 
 
+#. Deep History dataset (73k, last updated 2026 May):
+
+   https://huggingface.co/datasets/changliu8541/Assemblage_LinuxELF
