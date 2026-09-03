@@ -1,13 +1,27 @@
-Welcome to use Assemblage's documentation!
-==========================================
+Assemblage documentation
+========================
 
-Assemblage is a distributed binary corpus discovery, generation, and archival tool. 
-It is built to provide high-quality labeled metadata for the purposes of building training data for machine learning applications of binary analysis and other applications.
+Assemblage builds large, labeled corpora of binaries from open-source code.
+It searches GitHub for licensed C/C++ and Rust repositories, builds each one
+with several compilers and optimization levels, and stores the resulting
+binaries together with function-level and line-level debug metadata. The
+corpora are intended as training and evaluation data for machine learning on
+binaries, and for static analysis, dynamic analysis and reverse engineering
+research.
 
-You can find our paper at https://arxiv.org/abs/2405.03991, and our deployment/dataset docs at this website.
+* Code: https://github.com/Assemblage-Dataset/Assemblage (MIT license)
+* Paper: https://arxiv.org/abs/2405.03991
+* DeepHistory paper: https://arxiv.org/abs/2605.21615
+* Project site: https://assemblage-dataset.net
 
-Documentation Section
-------------------------
+The current code base builds Linux ELF binaries: C/C++ with gcc and clang,
+and Rust with the LLVM, Cranelift and GCC code generation backends of
+``rustc``. The Windows/MSVC and vcpkg workers that produced the Windows PE
+datasets are kept on separate branches and in a frozen ``legacy`` package;
+their pages say so.
+
+Contents
+--------
 
 .. toctree::
 
@@ -17,16 +31,16 @@ Documentation Section
    deployment_vcpkg
    api_reference
 
+Contact
+-------
 
-Contact us:
------------
+For dataset access, deployment help or other questions, email the current
+maintainers:
 
-To contact us about datasets access, deployment, or any other questions, please email current maintainers by:
+| Kristopher Micinski: kkmicins@syr.edu
+| Chang Liu: cliu57@syr.edu
 
-| Kristopher Micinski: kkmicins@syr.edu 
-| Chang Liu: cliu57@syr.edu 
-
-Here are the email addresses of all contributors to this project by last name:
+Contributors, by last name:
 
 | Naveen Ashok: nashok@syr.edu
 | Alex Duly: apduly@syr.edu
@@ -34,9 +48,8 @@ Here are the email addresses of all contributors to this project by last name:
 | James Holt: holt@lps.umd.edu
 | Mia Kerchen: mhkerche@syr.edu
 | Chang Liu: cliu57@syr.edu
-| Kristopher Micinski: kkmicins@syr.edu 
+| Kristopher Micinski: kkmicins@syr.edu
 | Townsend Southard Pantano: tgsoutha@syr.edu
 | Edward Raff: Raff.Edward@gmail.com
 | Rebecca Saul: Saul_Rebecca@bah.com
 | Yihao Sun: ysun67@syr.edu
-

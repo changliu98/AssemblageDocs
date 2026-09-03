@@ -3,11 +3,11 @@
 # -- Project information
 
 project = 'Assemblage'
-copyright = '2025, Assemblage Project'
+copyright = '2026, Assemblage Project'
 author = 'Assemblage Project'
 
-release = '0.1'
-version = '0.1.1'
+release = '2.0'
+version = '2.0.0a0'
 
 # -- General configuration
 

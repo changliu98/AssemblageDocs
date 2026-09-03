@@ -1,139 +1,108 @@
-Deployment on Windows
-=====================
-
-
-.. autosummary::
-   :toctree: generated
-
-Intro
---------
-
-Deployment on Linux system is more convenient. Deployment on Windows is possible but more complicated due to the nature of Windows system, and they can't be packed as images for distribution.
-To deploy Assemblage and harvest, you need to deploy the coordinator to a server, then set up workers on Windows instances.
-
-
-Coordinator Setup
------------------
-
-Please make sure these are installed, or you have access to:
-
-#. Docker
-#. Docker Compose
-#. Git
-#. Port 5672, 50052
-#. A GitHub account, and a personal access token
-
-.. warning::
-    You should put you server under firewall and limit the access to these ports, also make sure these ports are accessible by your worker instances
+Windows builders (legacy)
+=========================
 
 .. note::
-    By default, only repositories that have licenses will be used to build binaries
+   The Windows/MSVC build path is frozen. On ``main`` it lives in
+   ``backend/assemblage/legacy/windows`` and ``docker/legacy``, is excluded
+   from the test gates, and is used only when a builder runs with
+   ``COMPILER=MSVC``. The datasets built with it (Windows GitHub, vcpkg and
+   the Windows half of DeepHistory) are published; new development targets
+   Linux.
 
-#.  Clone the repository
-    
-        .. code-block:: bash
-    
-            git clone git@github.com:Assemblage-Dataset/Assemblage.git
-            cd Assemblage
+There are two ways to run it.
 
+Option A: Windows container against a Linux coordinator
+-------------------------------------------------------
 
-#.  Install local dependencies, and change the crawler, coordinator configurations, which is locating under `/assemblage/configure/` folder. 
-    You can also change the location of these config files, just remember to also update the `docker-compose.yml` file
+``compose/windows.yml`` on ``main`` builds ``docker/legacy/windows/Dockerfile``
+and runs ``backend/scripts/start_windows_worker.ps1``, which loads the
+Visual Studio developer environment, registers the DIA SDK DLLs and starts
+``start_worker.py`` with ``TYPE=builder``, ``COMPILER=MSVC`` and
+``LANGUAGE=c++``.
 
-        .. code-block:: bash
+The image is Windows Server Core LTSC 2022 with Visual Studio 2022 Build
+Tools (VC tools, MSBuild, Windows 10 SDK, CMake), Python 3.12, Git,
+Universal Ctags and the ``Dia2Dump`` tool shipped in the repository.
 
-            mkdir /assemblage/configure
-            nano assemblage/configure/coordinator_config.json
-            nano assemblage/configure/crawler_config.json
-            pip install -r requirements.txt
+Requirements:
 
-#.  Build the docker image
+* A Windows Docker host running Windows containers. Windows images cannot
+  be redistributed, so the image is built from Microsoft's installers and
+  the first build takes a long time.
+* The Linux coordinator, with RabbitMQ (5672) and MinIO reachable from the
+  Windows host. Set ``MQ_HOST`` and ``S3_HOST`` in
+  ``secrets.env`` to that host.
 
-        .. code-block:: bash
+.. code-block:: powershell
 
-            sh build.sh
-            docker compose up -d
+   docker compose -f compose/windows.yml up --build -d
 
+The container mounts ``backend`` at ``C:\app`` and ``binaries`` at
+``C:\binaries``. Registration, task flow and reporting are the same as for
+Linux builders; MSVC builders register with ``compiler=MSVC``. This path is
+not covered by any automated test, and the frozen strategy has a known
+signature mismatch with the current builder pipeline, so expect to fix code
+before production use.
 
+Option B: the ``windows_github`` branch
+---------------------------------------
 
-Worker Setup   
-------------
+The branch that produced the Windows GitHub dataset (last commit May 2024)
+is an older code base with a gRPC coordinator on port 50052, MySQL and JSON
+configuration files. Its worker runs directly on a Windows machine:
 
-The Windows worker requires many software packages to be installed, and the installation is not as simple as Linux worker. 
-Here is the step-by-step guide to set up a Windows worker
+#. Install Python 3.9 or newer, Git, Visual Studio with the MSVC build
+   tools, CMake, 7zip, Dia2dump and Universal Ctags. Put ``python``,
+   ``msbuild``, ``ctags``, ``readtags``, ``dia2dump`` and ``7z`` on
+   ``PATH``.
+#. Register the DIA SDK DLL as administrator:
 
-#. Install/build the software:
+   .. code-block:: bat
 
-    #. Python 3.9+
-    #. Git
-    #. MSVC Build Tools
-    #. Microsoft Visual Studio
-    #. CMake
-    #. 7zip
-    #. Dia2dump
-    #. Universal Ctags
+      regsvr32 "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\DIA SDK\bin\msdia140.dll"
+      regsvr32 "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildCommunityTools\DIA SDK\bin\amd64\msdia140.dll"
 
-#. Make sure these executables are added to the PATH
+#. Check out the branch and install the packages its modules import (the
+   branch has no requirements file):
 
-    #. ctags
-    #. dia2dump
-    #. 7z
-    #. readtags
-    #. msbuild
-    #. python
+   .. code-block:: bat
 
-#. Register dll file for dia2dump
+      git clone https://github.com/Assemblage-Dataset/Assemblage.git
+      cd Assemblage
+      git checkout windows_github
 
-    .. code-block:: bash
+#. Write ``assemblage/configure/worker_config.json`` with the coordinator
+   address and credentials, then run
+   ``python start_worker.py --config assemblage/configure``.
 
-        # Need administrator privileges
-        regsvr32 "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\DIA SDK\bin\msdia140.dll"
-        regsvr32 "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildCommunityTools\DIA SDK\bin\amd64\msdia140.dll"
+The matching coordinator is the same branch's ``docker compose up`` with
+``coordinator_config.json`` and ``crawler_config.json``. Task Scheduler can
+start the worker at boot on cloud instances; helper scripts are under
+``script``.
 
-#. Clone the repository
+That branch can also rebuild a dataset from a recipe through the
+``loadrepo`` command of its ``cli.py``:
+:download:`sept25.json.zip <assets/sept25.json.zip>` and
+:download:`winpe_recipe.zip <assets/winpe_recipe.zip>`. Repositories may
+since have been deleted or changed, and rebuilding the same source does not
+produce byte-identical binaries.
 
-    .. code-block:: bash
+DeepHistory on Windows (Conan)
+------------------------------
 
-        git clone git@github.com:Assemblage-Dataset/Assemblage.git
-        cd Assemblage
-        git checkout windows_github
+``backend/scripts/build_deephistory.py`` builds several released versions
+of each library with Conan and MSVC on a Windows host, driven by
+``backend/assemblage/legacy/deephistory_manifest.json``:
 
-#. Install the dependencies
-    
-        .. code-block:: bash
-    
-            pip install -r requirements.txt
+.. code-block:: powershell
 
-#. Change the worker configuration, which is locating under `/assemblage/configure/` folder, examples are provided in the repository
+   python backend/scripts/build_deephistory.py --manifest backend/assemblage/legacy/deephistory_manifest.json
+   python backend/scripts/build_deephistory.py --packages sqlite3 fmt zlib
+   python backend/scripts/build_deephistory.py --manifest backend/assemblage/legacy/deephistory_manifest.json --resume
 
-    .. code-block:: bash
-
-        mkdir /assemblage/configure
-        nano assemblage/configure/worker_config.json
-
-#. Run the worker
-
-    .. code-block:: bash
-
-        python start_worker.py --config assemblage/configure
-
-.. note::
-    
-    You can create boot up tasks using Task scheduler, to start the worker automatically when the system starts, 
-    which is very useful for scaling up the workers on cloud instances. Some scripts are provided under `script` folder
-
-
-Optional: Recover dataset
--------------------------
-
-    Assemblage can recover the state from previous running state and remake the binary dataset from the last state, which can be useful
-    if the binary itself can not be distributed. To reload the previous state, grab some of the following recipe(in JSON format), and 
-    boot up the CLI, navigate to `loadrepo` option, and provide the JSON file, system will build the dataset from the provided file.
-
-    :download:`sept25.json.zip <assets/sept25.json.zip>`
-    :download:`winpe_recipe.zip <assets/winpe_recipe.zip>`
-
-
-    .. warning::
-        The dataset restoration process does **not** guarantee generating exact same binaries, as the repository may have been hidden/deleted, some binaries might not be recovered, compiling and building same source code will generate slightly different binaries.
-        Please to be noted, to accurately recover dataset from source code, a **full git clone** with all history will be performed, which will be extremely slow and have high consumption of bandwidth and CPU resource.
+Output is one folder per package build containing ``assemblage_meta.json``
+and the DLL, EXE and PDB files, ready for the dataset CLI
+(``assemblage-dataset -g --data <out> --dbfile deephistory.sqlite --functions --lines --rvas --pdbs``).
+``docker/legacy/conan/Dockerfile`` packages the same toolchain as a Windows
+container, and ``TYPE=legacy_conan python backend/scripts/start_worker.py``
+runs the builder without a coordinator.
