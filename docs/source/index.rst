@@ -1,6 +1,9 @@
 Assemblage documentation
 ========================
 
+On September 3, 2026, I asked Claude Fable 5.1 to rewrite the documentation for me. This marks a point where much of the code and documentation is now LLM-written, with humans primarily providing direction. If you are using the Assemblage infrastructure code, you may have already noticed that it has undergone a major refactor by Fable 5, moving from a version that was mostly written by humans. I am not a fan of the idea of AI doing everything for humans. However, I do believe that repetitive and routine work is better handled by AI, so that we can spend more of our time and attention to the things that actually require human judgment and creativity.
+
+
 Assemblage builds large, labeled corpora of binaries from open-source code.
 It searches GitHub for licensed C/C++ and Rust repositories, builds each one
 with several compilers and optimization levels, and stores the resulting
